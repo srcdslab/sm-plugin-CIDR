@@ -11,14 +11,12 @@
 
 #define CHAT_PREFIX     "{fullred}[CIDR]{white}"
 
-#define PLUGIN_VERSION  "2.3"
-
 public Plugin myinfo = 
 {
 	name        = "CIDR Block",
 	author      = "Bottiger, maxime1907, .Rushaway",
 	description = "Block IPS with CIDR notation",
-	version     = PLUGIN_VERSION,
+	version     = "2.3.0",
 	url         = "http://skial.com"
 };
 
@@ -420,7 +418,7 @@ void Discord_Notify(const char[] sAction)
     Discord_SendMessage(sWebhook, sMessage);
 }
 
-bool Forward_OnPerformed(int client, const char[] sAction)
+stock void Forward_OnPerformed(int client, const char[] sAction)
 {
     Call_StartForward(g_hOnActionPerformed);
     Call_PushCell(client);
