@@ -424,7 +424,7 @@ public void OnWebHookExecuted(HTTPResponse response, DataPack pack)
 {
     if (response.Status != HTTPStatus_OK)
     {
-        LogError("Failed to send proxykiller webhook");
+        LogError("Failed to send CIDR webhook");
     }
 }
 
