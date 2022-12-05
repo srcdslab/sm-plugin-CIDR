@@ -1,7 +1,6 @@
 #pragma semicolon 1
 
 #include <multicolors>
-#tryinclude <Discord>
 #include <discordWebhookAPI>
 
 #pragma newdecls required
@@ -36,9 +35,6 @@ public void OnPluginStart()
     g_path = CreateConVar("sm_cidr_path", "configs/cidrblock.cfg", "Path to block list.");
     g_cRejectMsg = CreateConVar("sm_cidr_reject_message", "You are banned from this server", "Message that banned users will see.");
     g_cvWebhook = CreateConVar("sm_cidr_discord_webhook", "", "The webhook URL of your Discord channel.", FCVAR_PROTECTED);
-    g_cServerName = FindConVar("hostname");
-    if (g_cServerName == null)
-		g_cServerName = CreateConVar("sm_cidr_servernmame", "Zombie Escape", "Enter the Server Name to have name in Logs.", FCVAR_NOTIFY);
 
     RegAdminCmd("sm_cidr_reload", Command_Reload, ADMFLAG_ROOT, "Clear banlist and reload bans from file.");
     RegAdminCmd("sm_cidr_add", Command_Add, ADMFLAG_ROOT, "Add CIDR to banlist.");
@@ -397,6 +393,8 @@ void NotifyAdmins(int client, const char[] sAction)
 
 void Discord_Notify(const char[] sAction)
 {
+    g_cServerName = FindConVar("hostname");
+
 	char sDetails[2048];
 	Format(sDetails, sizeof(sDetails), "%s", sAction);
 
@@ -435,7 +433,5 @@ bool Forward_OnPerformed(int client, const char[] sAction)
     Call_PushString(sAction);
     Call_Finish();
 
-#if defined _Discord_Included
 	Discord_Notify(sAction);
-#endif
 }
