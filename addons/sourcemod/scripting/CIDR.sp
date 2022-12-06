@@ -1,11 +1,7 @@
 #pragma semicolon 1
 
 #include <multicolors>
-#tryinclude <Discord>
-
-#if !defined _Discord_Included
-	#warning "Discord.inc" include file not found, some features may not work!
-#endif
+#include <discordWebhookAPI>
 
 #pragma newdecls required
 
@@ -16,14 +12,14 @@ public Plugin myinfo =
 	name        = "CIDR Block",
 	author      = "Bottiger, maxime1907, .Rushaway",
 	description = "Block IPS with CIDR notation",
-	version     = "2.3.0",
+	version     = "2.4",
 	url         = "http://skial.com"
 };
 
 bool g_late, g_loaded;
 
 Handle g_path, g_min, g_max, g_expire;
-ConVar g_cRejectMsg, g_cServerName;
+ConVar g_cRejectMsg, g_cServerName, g_cvWebhook;
 
 // Api
 Handle g_hOnActionPerformed;
@@ -38,7 +34,7 @@ public void OnPluginStart()
 {
     g_path = CreateConVar("sm_cidr_path", "configs/cidrblock.cfg", "Path to block list.");
     g_cRejectMsg = CreateConVar("sm_cidr_reject_message", "You are banned from this server", "Message that banned users will see.");
-    g_cServerName = FindConVar("hostname");
+    g_cvWebhook = CreateConVar("sm_cidr_discord_webhook", "", "The webhook URL of your Discord channel.", FCVAR_PROTECTED);
 
     RegAdminCmd("sm_cidr_reload", Command_Reload, ADMFLAG_ROOT, "Clear banlist and reload bans from file.");
     RegAdminCmd("sm_cidr_add", Command_Add, ADMFLAG_ROOT, "Add CIDR to banlist.");
@@ -397,35 +393,45 @@ void NotifyAdmins(int client, const char[] sAction)
 
 void Discord_Notify(const char[] sAction)
 {
-    char sWebhook[64];
-    Format(sWebhook, sizeof(sWebhook), "cidrlogs");
+    g_cServerName = FindConVar("hostname");
 
-    char sDetails[2048];
-    Format(sDetails, sizeof(sDetails), "%s", sAction);
+	char sDetails[2048];
+	Format(sDetails, sizeof(sDetails), "%s", sAction);
 
-    char sTime[64];
-    int iTime = GetTime();
-    FormatTime(sTime, sizeof(sTime), "Date : %d/%m/%Y @ %H:%M:%S", iTime);
+	char sTime[64];
+	int iTime = GetTime();
+	FormatTime(sTime, sizeof(sTime), "Date : %d/%m/%Y @ %H:%M:%S", iTime);
 
-    char sServerName[128], sServerText[128];
-    GetConVarString(g_cServerName, sServerName, sizeof(sServerName));
-    Format(sServerText, sizeof (sServerText), "Action performed on: %s", sServerName);
+	char sServerName[128], sServerText[128];
+	GetConVarString(g_cServerName, sServerName, sizeof(sServerName));
+	Format(sServerText, sizeof (sServerText), "Action performed on: %s", sServerName);
 
-    char sMessage[4096];
-    Format(sMessage, sizeof(sMessage), "```%s \n%s \n%s```", sServerText, sTime, sDetails);
-    ReplaceString(sMessage, sizeof(sMessage), "\\n", "\n");
+	char sMessage[4096];
+	Format(sMessage, sizeof(sMessage), "```%s \n%s \n%s```", sServerText, sTime, sDetails);
+	ReplaceString(sMessage, sizeof(sMessage), "\\n", "\n");
 
-    Discord_SendMessage(sWebhook, sMessage);
+	char szWebhookURL[1000];
+	g_cvWebhook.GetString(szWebhookURL, sizeof szWebhookURL);
+
+	Webhook webhook = new Webhook(sMessage);
+	webhook.Execute(szWebhookURL, OnWebHookExecuted);
+	delete webhook;
 }
 
-stock void Forward_OnPerformed(int client, const char[] sAction)
+public void OnWebHookExecuted(HTTPResponse response, DataPack pack)
+{
+    if (response.Status != HTTPStatus_OK)
+    {
+        LogError("Failed to send CIDR webhook");
+    }
+}
+
+bool Forward_OnPerformed(int client, const char[] sAction)
 {
     Call_StartForward(g_hOnActionPerformed);
     Call_PushCell(client);
     Call_PushString(sAction);
     Call_Finish();
 
-#if defined _Discord_Included
-    Discord_Notify(sAction);
-#endif
+	Discord_Notify(sAction);
 }
