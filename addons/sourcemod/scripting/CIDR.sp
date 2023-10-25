@@ -1,9 +1,7 @@
 #pragma semicolon 1
+#pragma newdecls required
 
 #include <multicolors>
-#include <discordWebhookAPI>
-
-#pragma newdecls required
 
 #define CHAT_PREFIX     "{fullred}[CIDR]{white}"
 
@@ -19,7 +17,7 @@ public Plugin myinfo =
 bool g_late, g_loaded;
 
 Handle g_path, g_min, g_max, g_expire;
-ConVar g_cRejectMsg, g_cServerName, g_cvWebhook;
+ConVar g_cRejectMsg;
 
 // Api
 Handle g_hOnActionPerformed;
@@ -27,6 +25,9 @@ Handle g_hOnActionPerformed;
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
     g_late = late;
+    RegPluginLibrary("CIDR");
+
+    g_hOnActionPerformed = CreateGlobalForward("CIDR_OnActionPerformed", ET_Ignore, Param_Cell, Param_Cell, Param_String);
     return APLRes_Success;
 }
 
@@ -34,7 +35,6 @@ public void OnPluginStart()
 {
     g_path = CreateConVar("sm_cidr_path", "configs/cidrblock.cfg", "Path to block list.");
     g_cRejectMsg = CreateConVar("sm_cidr_reject_message", "You are banned from this server", "Message that banned users will see.");
-    g_cvWebhook = CreateConVar("sm_cidr_discord_webhook", "", "The webhook URL of your Discord channel.", FCVAR_PROTECTED);
 
     RegAdminCmd("sm_cidr_reload", Command_Reload, ADMFLAG_ROOT, "Clear banlist and reload bans from file.");
     RegAdminCmd("sm_cidr_add", Command_Add, ADMFLAG_ROOT, "Add CIDR to banlist.");
@@ -44,9 +44,6 @@ public void OnPluginStart()
     g_min = CreateArray();
     g_max = CreateArray();
     g_expire = CreateArray();
-
-    // Api
-    g_hOnActionPerformed = CreateGlobalForward("CIDR_OnActionPerformed", ET_Ignore, Param_Cell, Param_String);
 }
 
 public bool OnClientConnect(int client, char[] rejectmsg, int maxlen)
@@ -76,20 +73,9 @@ public Action Command_Reload(int client, int args)
     GetConVarString(g_path, target, sizeof(target));
     char buffer[255];
 
-    if (IsValidClient(client))
-    {
-        CPrintToChat(client, "%s Cleared cached banlist and reloaded %s.", CHAT_PREFIX, target);
-        FormatEx(buffer, sizeof(buffer), "[CIDR] %L Cleared cached banlist and reloaded %s", client, target);
-        LogAction(client, -1, buffer);
-        NotifyAdmins(client, buffer);
-    }
-    if (client == 0)
-    {
-        PrintToConsole(client, "[CIDR] Cleared cached banlist and reloaded %s.", target);
-        FormatEx(buffer, sizeof(buffer), "[CIDR] <Console> Cleared cached banlist and reloaded %s", target);
-        LogAction(-1, -1, buffer);
-        NotifyAdmins(client, buffer);
-    }
+    CReplyToCommand(client, "%s Cleared cached banlist and reloaded %s.", CHAT_PREFIX, target);
+    FormatEx(buffer, sizeof(buffer), "[CIDR] %L Cleared cached banlist and reloaded %s", client, target);
+    LogAction(client, -1, buffer);
 
     return Plugin_Handled;
 }
@@ -297,25 +283,36 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
         return false;
     }
 
-    char adminSteamID[64];
-    char adminName[64];
-    char buffer[250];
-    if (IsValidClient(adminId))
-        GetClientAuthId(adminId, AuthId_Steam2, adminSteamID, sizeof(adminSteamID));
+    char adminSteamID[64], adminName[64], sAction[250], sExpireTime[64];
+
+    if (expires == 0) // Permaban
+        Format(sExpireTime, sizeof(sExpireTime), "Never");
     else
-        Format(adminSteamID, sizeof(adminSteamID), " <Console> OR <STEAMID_ERROR> ");
+        FormatTime(sExpireTime, sizeof(sExpireTime), "%d/%m/%Y @ %H:%M:%S", expires);
+
+    if (IsValidClient(adminId))
+        GetClientAuthId(adminId, AuthId_Steam2, adminSteamID, sizeof(adminSteamID), false);
+    else
+        Format(adminSteamID, sizeof(adminSteamID), "<Console>");
     
     if (IsValidClient(adminId))
         GetClientName(adminId, adminName, sizeof(adminName));
     else
-        Format(adminName, sizeof(adminName), "<Console> OR <NAME_ERROR>");
+        Format(adminName, sizeof(adminName), "<Console>");
 
     WriteFileLine(hFile, "%s %d Player: %s Reason: %s Banned by: %s (%s)", cidr_string, expires, playerName, reason, adminName, adminSteamID);
-    FormatEx(buffer, sizeof(buffer), "[CIDR] Ban has been added ! More details below.. \nBanned by: %s [%s] \nPlayerName: %s \nBanned IP Range: %s \nExpiration: %d \nReason: %s", adminName, adminSteamID, playerName, cidr_string, expires, reason);
-    LogAction(-1, -1, buffer);
-    NotifyAdmins(adminId, buffer);
-
     CloseHandle(hFile);
+
+    FormatEx(sAction, sizeof(sAction), "Banned by: %s [%s] \nPlayerName: %s \nBanned IP Range: %s \nExpiration: %s \nReason: %s", adminName, adminSteamID, playerName, cidr_string, sExpireTime, reason);
+    LogAction(-1, -1, "[CIDR] Ban has been added! \n%s", sAction);
+
+    for(int i = 1; i <= MaxClients; i++)
+	{
+		if(IsClientInGame(i) && !IsFakeClient(i) && CheckCommandAccess(i, "sm_cidr_add", ADMFLAG_ROOT))
+			CPrintToChat(i, "{red}%s", sAction);
+	}
+
+    Forward_OnPerformed(adminId, sAction);
 
     return true;
 }
@@ -380,58 +377,10 @@ stock bool IsValidClient(int client, bool nobots = true)
 	return IsClientInGame(client);
 }
 
-void NotifyAdmins(int client, const char[] sAction)
-{
-	for(int i = 1; i <= MaxClients; i++)
-	{
-		if(IsClientInGame(i) && !IsFakeClient(i) && CheckCommandAccess(i, "sm_cidr_add", ADMFLAG_ROOT))
-			CPrintToChat(i, "{red}%s", sAction);
-	}
-
-	Forward_OnPerformed(client, sAction);
-}
-
-void Discord_Notify(const char[] sAction)
-{
-    g_cServerName = FindConVar("hostname");
-
-	char sDetails[2048];
-	Format(sDetails, sizeof(sDetails), "%s", sAction);
-
-	char sTime[64];
-	int iTime = GetTime();
-	FormatTime(sTime, sizeof(sTime), "Date : %d/%m/%Y @ %H:%M:%S", iTime);
-
-	char sServerName[128], sServerText[128];
-	GetConVarString(g_cServerName, sServerName, sizeof(sServerName));
-	Format(sServerText, sizeof (sServerText), "Action performed on: %s", sServerName);
-
-	char sMessage[4096];
-	Format(sMessage, sizeof(sMessage), "```%s \n%s \n%s```", sServerText, sTime, sDetails);
-	ReplaceString(sMessage, sizeof(sMessage), "\\n", "\n");
-
-	char szWebhookURL[1000];
-	g_cvWebhook.GetString(szWebhookURL, sizeof szWebhookURL);
-
-	Webhook webhook = new Webhook(sMessage);
-	webhook.Execute(szWebhookURL, OnWebHookExecuted);
-	delete webhook;
-}
-
-public void OnWebHookExecuted(HTTPResponse response, DataPack pack)
-{
-    if (response.Status != HTTPStatus_OK)
-    {
-        LogError("Failed to send CIDR webhook");
-    }
-}
-
-bool Forward_OnPerformed(int client, const char[] sAction)
+void Forward_OnPerformed(int client, const char[] sAction)
 {
     Call_StartForward(g_hOnActionPerformed);
     Call_PushCell(client);
     Call_PushString(sAction);
     Call_Finish();
-
-	Discord_Notify(sAction);
 }
