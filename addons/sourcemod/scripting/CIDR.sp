@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name        = "CIDR Block",
 	author      = "Bottiger, maxime1907, .Rushaway",
 	description = "Block IPS with CIDR notation",
-	version     = "2.4",
+	version     = "2.4.1",
 	url         = "http://skial.com"
 };
 
@@ -291,7 +291,7 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
         FormatTime(sExpireTime, sizeof(sExpireTime), "%d/%m/%Y @ %H:%M:%S", expires);
 
     if (IsValidClient(adminId))
-        GetClientAuthId(adminId, AuthId_Steam2, adminSteamID, sizeof(adminSteamID), false);
+        GetClientAuthId(adminId, AuthId_Steam3, adminSteamID, sizeof(adminSteamID), false);
     else
         Format(adminSteamID, sizeof(adminSteamID), "<Console>");
     
@@ -303,7 +303,7 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     WriteFileLine(hFile, "%s %d Player: %s Reason: %s Banned by: %s (%s)", cidr_string, expires, playerName, reason, adminName, adminSteamID);
     CloseHandle(hFile);
 
-    FormatEx(sAction, sizeof(sAction), "Banned by: %s [%s] \nPlayerName: %s \nBanned IP Range: %s \nExpiration: %s \nReason: %s", adminName, adminSteamID, playerName, cidr_string, sExpireTime, reason);
+    FormatEx(sAction, sizeof(sAction), "Banned by: %s %s \nPlayerName: %s \nBanned IP Range: %s \nExpiration: %s \nReason: %s", adminName, adminSteamID, playerName, cidr_string, sExpireTime, reason);
     LogAction(-1, -1, "[CIDR] Ban has been added! \n%s", sAction);
 
     for(int i = 1; i <= MaxClients; i++)
