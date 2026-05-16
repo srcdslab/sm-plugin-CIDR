@@ -7,11 +7,11 @@
 
 public Plugin myinfo = 
 {
-	name        = "CIDR Block",
-	author      = "Bottiger, maxime1907, .Rushaway",
-	description = "Block IPS with CIDR notation",
-	version     = "2.4.2",
-	url         = "http://skial.com"
+    name        = "CIDR Block",
+    author      = "Bottiger, maxime1907, .Rushaway",
+    description = "Block IPS with CIDR notation",
+    version     = "2.4.3",
+    url         = "http://skial.com"
 };
 
 bool g_late, g_loaded;
@@ -307,12 +307,12 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     LogAction(-1, -1, "[CIDR] Ban has been added! \n%s", sAction);
 
     for(int i = 1; i <= MaxClients; i++)
-	{
-		if(IsClientInGame(i) && !IsFakeClient(i) && CheckCommandAccess(i, "sm_cidr_add", ADMFLAG_ROOT))
-			CPrintToChat(i, "{red}%s", sAction);
-	}
+    {
+        if(IsClientInGame(i) && !IsFakeClient(i) && CheckCommandAccess(i, "sm_cidr_add", ADMFLAG_ROOT))
+            CPrintToChat(i, "{red}%s", sAction);
+    }
 
-    Forward_OnPerformed(adminId, sAction);
+    Forward_OnPerformed(adminId, currentTime, sAction);
 
     return true;
 }
@@ -370,17 +370,18 @@ stock int inet_aton(const char[] ip)
 
 stock bool IsValidClient(int client, bool nobots = true)
 {
-	if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client)))
-	{
-		return false;
-	}
-	return IsClientInGame(client);
+    if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client)))
+    {
+        return false;
+    }
+    return IsClientInGame(client);
 }
 
-void Forward_OnPerformed(int client, const char[] sAction)
+void Forward_OnPerformed(int client, int timestamp, const char[] sAction)
 {
     Call_StartForward(g_hOnActionPerformed);
     Call_PushCell(client);
+    Call_PushCell(timestamp);
     Call_PushString(sAction);
     Call_Finish();
 }
