@@ -15,9 +15,9 @@ This repository contains a **CIDR Block plugin** for SourceMod, a scripting plat
 
 - **Language**: SourcePawn (.sp files)
 - **Platform**: SourceMod 1.12+ (compatible with 1.11.0-git6934+)
-- **Build System**: SourceKnight (configured via `sourceknight.yaml`)
+- **Build System**: Native GitHub Actions workflow (configured via `.github/workflows/ci.yml`)
 - **Dependencies**: MultiColors library for chat formatting
-- **Compiler**: SourcePawn Compiler (spcomp) via SourceKnight
+- **Compiler**: SourcePawn Compiler (spcomp) via `rumblefrog/setup-sp`
 
 ## Project Structure
 
@@ -33,29 +33,28 @@ addons/sourcemod/
 ```
 
 **Key Files:**
-- `sourceknight.yaml` - Build configuration and dependencies
 - `CIDR.sp` - Main plugin implementation
 - `CIDR.inc` - Public API for plugin integration
-- `.github/workflows/ci.yml` - CI/CD pipeline
+- `.github/workflows/ci.yml` - CI/CD pipeline (build, tag, release)
 
-## Build System (SourceKnight)
+## Build System (GitHub Actions)
 
-This project uses **SourceKnight** for building and dependency management:
+This project builds via a native **GitHub Actions** workflow (`.github/workflows/ci.yml`), with no external build tool required:
 
 ```bash
-# Install SourceKnight (if not available)
-pip install sourceknight
+# CI installs the SourcePawn compiler via rumblefrog/setup-sp,
+# clones dependencies into deps/, and compiles with spcomp directly:
+spcomp -i include -o ../plugins/CIDR.smx CIDR.sp
 
-# Build the plugin
-sourceknight build
-
-# Build output location
-.sourceknight/package/addons/sourcemod/plugins/CIDR.smx
+# Build output location (in CI)
+/tmp/package/addons/sourcemod/plugins/CIDR.smx
 ```
 
-**Dependencies** (managed via sourceknight.yaml):
-- SourceMod 1.11.0-git6934 (base platform)
-- MultiColors library (chat formatting)
+To build locally, install a matching `spcomp` binary (SourceMod 1.12.x) and run the same command from `addons/sourcemod/scripting`, after placing the MultiColors include files under `addons/sourcemod/scripting/include/`.
+
+**Dependencies** (managed via `.github/workflows/ci.yml`):
+- SourceMod 1.12 (base platform, via `rumblefrog/setup-sp`)
+- MultiColors library (chat formatting, cloned from `srcdslab/sm-plugin-MultiColors`)
 
 ## Code Style & Standards
 
@@ -184,11 +183,12 @@ stock bool IsValidClient(int client, bool nobots = true)
 
 ### Local Testing
 ```bash
-# Build the plugin
-sourceknight build
+# Build the plugin (spcomp must be on PATH, includes staged under
+# addons/sourcemod/scripting/include/)
+spcomp -i include -o ../plugins/CIDR.smx CIDR.sp
 
 # Check for compilation errors
-# Output should be in .sourceknight/package/addons/sourcemod/plugins/
+# Output should be in addons/sourcemod/plugins/CIDR.smx
 ```
 
 ### Runtime Testing
@@ -236,7 +236,7 @@ public void CIDR_OnActionPerformed(int client, char[] sAction)
 ## Development Workflow
 
 1. **Make Changes**: Edit `.sp` files following style guidelines
-2. **Build**: Run `sourceknight build` to compile
+2. **Build**: Run `spcomp` to compile (or push/open a PR to build via CI)
 3. **Test**: Deploy to test server and verify functionality  
 4. **Commit**: Use clear commit messages describing changes
 5. **CI/CD**: Automatic building and release via GitHub Actions
