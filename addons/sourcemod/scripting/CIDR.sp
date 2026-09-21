@@ -10,7 +10,7 @@ public Plugin myinfo =
     name        = "CIDR Block",
     author      = "Bottiger, maxime1907, .Rushaway",
     description = "Block IPS with CIDR notation",
-    version     = "2.4.3",
+    version     = "2.4.4",
     url         = "http://skial.com"
 };
 
@@ -54,7 +54,7 @@ public bool OnClientConnect(int client, char[] rejectmsg, int maxlen)
     {
         char myRejectMsg[255];
         g_cRejectMsg.GetString(myRejectMsg, sizeof(myRejectMsg));
-        strcopy(rejectmsg, sizeof(myRejectMsg), myRejectMsg);
+        strcopy(rejectmsg, maxlen, myRejectMsg);
         LogAction(client, -1, "[CIDR] Connection rejected for %L", client);
     }
     return !blocked;
@@ -322,8 +322,8 @@ stock bool ParseCIDR(const char[] cidr_string, bool testParsing = false)
     char cidr[2][19];
     char ip[2][17];
 
-    ExplodeString(cidr_string, " ", cidr, 3, 19);
-    ExplodeString(cidr[0], "/", ip, 2, 17);
+    ExplodeString(cidr_string, " ", cidr, sizeof(cidr), sizeof(cidr[]));
+    ExplodeString(cidr[0], "/", ip, sizeof(ip), sizeof(ip[]));
 
     int baseip = inet_aton(ip[0]);
     int prefix = StringToInt(ip[1]);
