@@ -10,7 +10,7 @@ public Plugin myinfo =
     name        = "CIDR Block",
     author      = "Bottiger, maxime1907, .Rushaway",
     description = "Block IPS with CIDR notation",
-    version     = "2.4.3",
+    version     = "2.4.4",
     url         = "http://skial.com"
 };
 
