@@ -10,24 +10,25 @@ public Plugin myinfo =
     name        = "CIDR Block",
     author      = "Bottiger, maxime1907, .Rushaway",
     description = "Block IPS with CIDR notation",
-    version     = "2.4.4",
+    version     = "2.4.5",
     url         = "http://skial.com"
 };
 
 bool g_late, g_loaded;
 
-Handle g_path, g_min, g_max, g_expire;
+ConVar g_path;
+ArrayList g_min, g_max, g_expire;
 ConVar g_cRejectMsg;
 
 // Api
-Handle g_hOnActionPerformed;
+GlobalForward g_hOnActionPerformed;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
     g_late = late;
     RegPluginLibrary("CIDR");
 
-    g_hOnActionPerformed = CreateGlobalForward("CIDR_OnActionPerformed", ET_Ignore, Param_Cell, Param_Cell, Param_String);
+    g_hOnActionPerformed = new GlobalForward("CIDR_OnActionPerformed", ET_Ignore, Param_Cell, Param_Cell, Param_String);
     return APLRes_Success;
 }
 
@@ -41,9 +42,9 @@ public void OnPluginStart()
 
     AutoExecConfig(true);
 
-    g_min = CreateArray();
-    g_max = CreateArray();
-    g_expire = CreateArray();
+    g_min = new ArrayList();
+    g_max = new ArrayList();
+    g_expire = new ArrayList();
 }
 
 public bool OnClientConnect(int client, char[] rejectmsg, int maxlen)
@@ -70,7 +71,7 @@ public Action Command_Reload(int client, int args)
     CIDR_Reload();
 
     char target[PLATFORM_MAX_PATH];
-    GetConVarString(g_path, target, sizeof(target));
+    g_path.GetString(target, sizeof(target));
     char buffer[255];
 
     CReplyToCommand(client, "%s Cleared cached banlist and reloaded %s.", CHAT_PREFIX, target);
@@ -142,9 +143,9 @@ public void CIDR_Reload()
     g_loaded = false;
     g_late = true;
 
-    ClearArray(g_min);
-    ClearArray(g_max);
-    ClearArray(g_expire);
+    g_min.Clear();
+    g_max.Clear();
+    g_expire.Clear();
 
     CIDR_Load();
 }
@@ -180,20 +181,20 @@ stock void ParseFile()
     char path[PLATFORM_MAX_PATH];
     char line[1024];
 
-    Handle hFile;
+    File hFile;
 
-    GetConVarString(g_path, target, sizeof(target));
+    g_path.GetString(target, sizeof(target));
     
     BuildPath(Path_SM, path, PLATFORM_MAX_PATH, target);
     hFile = OpenFile(path, "a+r");
 
-    if (hFile == INVALID_HANDLE)
+    if (hFile == null)
     {
         LogError("Error while trying to create %s", target);
         return;
     }
 
-    while (!IsEndOfFile(hFile) && ReadFileLine(hFile, line, sizeof(line)))
+    while (!hFile.EndOfFile() && hFile.ReadLine(line, sizeof(line)))
     {
         TrimString(line);
         if(line[0] == '#' || line[0] == '\x00')
@@ -202,7 +203,7 @@ stock void ParseFile()
         ParseCIDR(line);
     }
 
-    CloseHandle(hFile);
+    delete hFile;
 }
 
 stock bool IsBlocked(int client)
@@ -211,17 +212,17 @@ stock bool IsBlocked(int client)
     GetClientIP(client, ip, sizeof(ip));
 
     int ipn = inet_aton(ip);
-    int entries = GetArraySize(g_min);
+    int entries = g_min.Length;
 
     int time = GetTime();
 
     for (int i = 0; i < entries; i++)
     {
-        int min = GetArrayCell(g_min, i);
-        int max = GetArrayCell(g_max, i);
+        int min = g_min.Get(i);
+        int max = g_max.Get(i);
         if (ipn >= min && ipn <= max)
         {
-            int expire = GetArrayCell(g_expire, i);
+            int expire = g_expire.Get(i);
             if (expire == 0 || time < expire)
                 return true;
         }
@@ -235,14 +236,14 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     char target[PLATFORM_MAX_PATH];
     char path[PLATFORM_MAX_PATH];
 
-    Handle hFile;
+    File hFile;
 
-    GetConVarString(g_path, target, sizeof(target));
+    g_path.GetString(target, sizeof(target));
 
     BuildPath(Path_SM, path, PLATFORM_MAX_PATH, target);
     hFile = OpenFile(path, "a+w");
 
-    if (hFile == INVALID_HANDLE)
+    if (hFile == null)
     {
         LogError("Error while trying to create %s", target);
         return false;
@@ -300,8 +301,8 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     else
         Format(adminName, sizeof(adminName), "<Console>");
 
-    WriteFileLine(hFile, "%s %d Player: %s Reason: %s Banned by: %s (%s)", cidr_string, expires, playerName, reason, adminName, adminSteamID);
-    CloseHandle(hFile);
+    hFile.WriteLine("%s %d Player: %s Reason: %s Banned by: %s (%s)", cidr_string, expires, playerName, reason, adminName, adminSteamID);
+    delete hFile;
 
     FormatEx(sAction, sizeof(sAction), "Banned by: %s %s \nPlayerName: %s \nBanned IP Range: %s \nExpiration: %s \nReason: %s", adminName, adminSteamID, playerName, cidr_string, sExpireTime, reason);
     LogAction(-1, -1, "[CIDR] Ban has been added! \n%s", sAction);
@@ -345,9 +346,9 @@ stock bool ParseCIDR(const char[] cidr_string, bool testParsing = false)
     int start = baseip >> shift << shift;
     int end   = start | mask;
 
-    PushArrayCell(g_min, start);
-    PushArrayCell(g_max, end);
-    PushArrayCell(g_expire, expire);
+    g_min.Push(start);
+    g_max.Push(end);
+    g_expire.Push(expire);
 
     return true;
 }
