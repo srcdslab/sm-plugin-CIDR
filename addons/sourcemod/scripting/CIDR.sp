@@ -10,7 +10,7 @@ public Plugin myinfo =
     name        = "CIDR Block",
     author      = "Bottiger, maxime1907, .Rushaway",
     description = "Block IPS with CIDR notation",
-    version     = "2.4.5",
+    version     = "2.4.6",
     url         = "http://skial.com"
 };
 
@@ -34,6 +34,8 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart()
 {
+    LoadTranslations("CIDR.phrases");
+
     g_path = CreateConVar("sm_cidr_path", "configs/cidrblock.cfg", "Path to block list.");
     g_cRejectMsg = CreateConVar("sm_cidr_reject_message", "You are banned from this server", "Message that banned users will see.");
 
@@ -74,7 +76,7 @@ public Action Command_Reload(int client, int args)
     g_path.GetString(target, sizeof(target));
     char buffer[255];
 
-    CReplyToCommand(client, "%s Cleared cached banlist and reloaded %s.", CHAT_PREFIX, target);
+    CReplyToCommand(client, "%s %t", CHAT_PREFIX, "Banlist Reloaded", target);
     FormatEx(buffer, sizeof(buffer), "[CIDR] %L Cleared cached banlist and reloaded %s", client, target);
     LogAction(client, -1, buffer);
 
@@ -94,12 +96,12 @@ public Action Command_Add(int client, int args)
         if (IsValidClient(client))
         {
             GetCmdArg(0, cmd, sizeof(cmd));
-            CPrintToChat(client, "%s Usage: {cyan}%s 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\"", CHAT_PREFIX, cmd);
-            CPrintToChat(client, "%s IP Range helper", CHAT_PREFIX);
-            CPrintToChat(client, "{cyan}1.2.3.4/30 {white}(blocks 1.2.3.4 - 1.2.3.4) (PC)");
-            CPrintToChat(client, "{cyan}1.2.3.4/24 {white}(blocks 1.2.3.0 - 1.2.3.255) (Router/House)");
-            CPrintToChat(client, "{cyan}1.2.3.4/16 {white}(blocks 1.2.0.0 - 1.2.255.255) (City)");
-            CPrintToChat(client, "{cyan}1.2.3.4/8 {white}(blocks 1.0.0.0 - 1.255.255.255) (State)");
+            CPrintToChat(client, "%s %t", CHAT_PREFIX, "Add Usage", cmd);
+            CPrintToChat(client, "%s %t", CHAT_PREFIX, "Range Helper");
+            CPrintToChat(client, "%t", "Range Helper 30");
+            CPrintToChat(client, "%t", "Range Helper 24");
+            CPrintToChat(client, "%t", "Range Helper 16");
+            CPrintToChat(client, "%t", "Range Helper 8");
         }
         else
         {
@@ -129,7 +131,7 @@ public Action Command_Add(int client, int args)
         return  Plugin_Handled;
 
     if (IsValidClient(client))
-        CPrintToChat(client, "%s Successfully added ip range {cyan}%s", CHAT_PREFIX, ipRange);
+        CPrintToChat(client, "%s %t", CHAT_PREFIX, "IP Range Added", ipRange);
     else
         PrintToConsole(client, "[CIDR] Successfully added ip range %s", ipRange);
 
@@ -255,8 +257,8 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     {
         if (IsValidClient(adminId))
         {
-            CPrintToChat(adminId, "%s Invalid timestamp calculated (Time:{cyan}%d, Timestamp:%d)", CHAT_PREFIX, time, expires);
-            CPrintToChat(adminId, "%s If you are willing to permaban someone, please use a time value of 0", CHAT_PREFIX);
+            CPrintToChat(adminId, "%s %t", CHAT_PREFIX, "Invalid Timestamp", time, expires);
+            CPrintToChat(adminId, "%s %t", CHAT_PREFIX, "Permanent Ban Hint");
         }
         else
         {
@@ -273,8 +275,8 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     {
         if (IsValidClient(adminId))
         {
-            CPrintToChat(adminId, "%s Invalid address/mask provided", CHAT_PREFIX);
-            CPrintToChat(adminId, "%s Please verify the ip and range that you provided", CHAT_PREFIX);
+            CPrintToChat(adminId, "%s %t", CHAT_PREFIX, "Invalid Address");
+            CPrintToChat(adminId, "%s %t", CHAT_PREFIX, "Check Address");
         }
         else
         {
@@ -310,7 +312,12 @@ stock bool AddIP(const char[] cidr_string, int time, const char[] playerName, co
     for(int i = 1; i <= MaxClients; i++)
     {
         if(IsClientInGame(i) && !IsFakeClient(i) && CheckCommandAccess(i, "sm_cidr_add", ADMFLAG_ROOT))
-            CPrintToChat(i, "{red}%s", sAction);
+        {
+            if (expires == 0)
+                CPrintToChat(i, "%t", "Ban Added Permanent", adminName, adminSteamID, playerName, cidr_string, reason);
+            else
+                CPrintToChat(i, "%t", "Ban Added", adminName, adminSteamID, playerName, cidr_string, sExpireTime, reason);
+        }
     }
 
     Forward_OnPerformed(adminId, currentTime, sAction);

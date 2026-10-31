@@ -1,0 +1,149 @@
+"Phrases"
+{
+	"Banlist Reloaded"
+	{
+		"#format"	"{1:s}"
+		"en"		"Cleared cached banlist and reloaded {1}."
+		"fr"		"Cache de la banlist vidé et {1} rechargé."
+		"ru"		"Кэш банлиста очищен, файл {1} перезагружен."
+		"es"		"Caché de la lista de baneos borrada y {1} recargado."
+		"de"		"Banlisten-Cache geleert und {1} neu geladen."
+		"pt"		"Cache da lista de banimentos limpo e {1} recarregado."
+		"chi"		"已清除封禁列表缓存并重新加载 {1}。"
+	}
+	"Add Usage"
+	{
+		"#format"	"{1:s}"
+		"en"		"Usage: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"fr"		"Utilisation : {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"ru"		"Использование: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"es"		"Uso: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"de"		"Verwendung: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"pt"		"Uso: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"chi"		"用法：{cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+	}
+	"Range Helper"
+	{
+		"en"		"IP range helper"
+		"fr"		"Aide sur les plages d'IP"
+		"ru"		"Справка по диапазонам IP"
+		"es"		"Ayuda sobre rangos de IP"
+		"de"		"Hilfe zu IP-Bereichen"
+		"pt"		"Ajuda sobre faixas de IP"
+		"chi"		"IP 段说明"
+	}
+	"Range Helper 30"
+	{
+		"en"		"{cyan}1.2.3.4/30 {white}(blocks 1.2.3.4 - 1.2.3.4) (PC)"
+		"fr"		"{cyan}1.2.3.4/30 {white}(bloque 1.2.3.4 - 1.2.3.4) (PC)"
+		"ru"		"{cyan}1.2.3.4/30 {white}(блокирует 1.2.3.4 - 1.2.3.4) (ПК)"
+		"es"		"{cyan}1.2.3.4/30 {white}(bloquea 1.2.3.4 - 1.2.3.4) (PC)"
+		"de"		"{cyan}1.2.3.4/30 {white}(sperrt 1.2.3.4 - 1.2.3.4) (PC)"
+		"pt"		"{cyan}1.2.3.4/30 {white}(bloqueia 1.2.3.4 - 1.2.3.4) (PC)"
+		"chi"		"{cyan}1.2.3.4/30 {white}（封禁 1.2.3.4 - 1.2.3.4）（电脑）"
+	}
+	"Range Helper 24"
+	{
+		"en"		"{cyan}1.2.3.4/24 {white}(blocks 1.2.3.0 - 1.2.3.255) (Router/House)"
+		"fr"		"{cyan}1.2.3.4/24 {white}(bloque 1.2.3.0 - 1.2.3.255) (Box/Maison)"
+		"ru"		"{cyan}1.2.3.4/24 {white}(блокирует 1.2.3.0 - 1.2.3.255) (Роутер/Дом)"
+		"es"		"{cyan}1.2.3.4/24 {white}(bloquea 1.2.3.0 - 1.2.3.255) (Router/Casa)"
+		"de"		"{cyan}1.2.3.4/24 {white}(sperrt 1.2.3.0 - 1.2.3.255) (Router/Haushalt)"
+		"pt"		"{cyan}1.2.3.4/24 {white}(bloqueia 1.2.3.0 - 1.2.3.255) (Roteador/Casa)"
+		"chi"		"{cyan}1.2.3.4/24 {white}（封禁 1.2.3.0 - 1.2.3.255）（路由器/家庭）"
+	}
+	"Range Helper 16"
+	{
+		"en"		"{cyan}1.2.3.4/16 {white}(blocks 1.2.0.0 - 1.2.255.255) (City)"
+		"fr"		"{cyan}1.2.3.4/16 {white}(bloque 1.2.0.0 - 1.2.255.255) (Ville)"
+		"ru"		"{cyan}1.2.3.4/16 {white}(блокирует 1.2.0.0 - 1.2.255.255) (Город)"
+		"es"		"{cyan}1.2.3.4/16 {white}(bloquea 1.2.0.0 - 1.2.255.255) (Ciudad)"
+		"de"		"{cyan}1.2.3.4/16 {white}(sperrt 1.2.0.0 - 1.2.255.255) (Stadt)"
+		"pt"		"{cyan}1.2.3.4/16 {white}(bloqueia 1.2.0.0 - 1.2.255.255) (Cidade)"
+		"chi"		"{cyan}1.2.3.4/16 {white}（封禁 1.2.0.0 - 1.2.255.255）（城市）"
+	}
+	"Range Helper 8"
+	{
+		"en"		"{cyan}1.2.3.4/8 {white}(blocks 1.0.0.0 - 1.255.255.255) (State)"
+		"fr"		"{cyan}1.2.3.4/8 {white}(bloque 1.0.0.0 - 1.255.255.255) (Région)"
+		"ru"		"{cyan}1.2.3.4/8 {white}(блокирует 1.0.0.0 - 1.255.255.255) (Регион)"
+		"es"		"{cyan}1.2.3.4/8 {white}(bloquea 1.0.0.0 - 1.255.255.255) (Región)"
+		"de"		"{cyan}1.2.3.4/8 {white}(sperrt 1.0.0.0 - 1.255.255.255) (Region)"
+		"pt"		"{cyan}1.2.3.4/8 {white}(bloqueia 1.0.0.0 - 1.255.255.255) (Estado)"
+		"chi"		"{cyan}1.2.3.4/8 {white}（封禁 1.0.0.0 - 1.255.255.255）（地区）"
+	}
+	"IP Range Added"
+	{
+		"#format"	"{1:s}"
+		"en"		"Successfully added IP range {cyan}{1}"
+		"fr"		"Plage d'IP ajoutée avec succès : {cyan}{1}"
+		"ru"		"Диапазон IP успешно добавлен: {cyan}{1}"
+		"es"		"Rango de IP añadido correctamente: {cyan}{1}"
+		"de"		"IP-Bereich erfolgreich hinzugefügt: {cyan}{1}"
+		"pt"		"Faixa de IP adicionada com sucesso: {cyan}{1}"
+		"chi"		"已成功添加 IP 段：{cyan}{1}"
+	}
+	"Invalid Timestamp"
+	{
+		"#format"	"{1:d},{2:d}"
+		"en"		"Invalid timestamp calculated (Time:{cyan}{1}, Timestamp:{2})"
+		"fr"		"Horodatage calculé invalide (durée : {cyan}{1}, horodatage : {2})"
+		"ru"		"Вычислена неверная метка времени (время: {cyan}{1}, метка: {2})"
+		"es"		"Marca de tiempo calculada no válida (tiempo: {cyan}{1}, marca: {2})"
+		"de"		"Ungültiger Zeitstempel berechnet (Zeit: {cyan}{1}, Zeitstempel: {2})"
+		"pt"		"Timestamp calculado inválido (tempo: {cyan}{1}, timestamp: {2})"
+		"chi"		"计算出的时间戳无效（时间：{cyan}{1}，时间戳：{2}）"
+	}
+	"Permanent Ban Hint"
+	{
+		"en"		"If you want to ban someone permanently, use a time value of 0"
+		"fr"		"Pour bannir quelqu'un définitivement, utilisez une durée de 0"
+		"ru"		"Чтобы забанить навсегда, укажите время 0"
+		"es"		"Para banear a alguien permanentemente, usa un tiempo de 0"
+		"de"		"Um jemanden permanent zu bannen, verwende eine Zeit von 0"
+		"pt"		"Para banir alguém permanentemente, use o tempo 0"
+		"chi"		"如需永久封禁，请将时间设为 0"
+	}
+	"Invalid Address"
+	{
+		"en"		"Invalid address/mask provided"
+		"fr"		"Adresse/masque invalide"
+		"ru"		"Указан неверный адрес/маска"
+		"es"		"Dirección/máscara no válida"
+		"de"		"Ungültige Adresse/Maske angegeben"
+		"pt"		"Endereço/máscara inválido"
+		"chi"		"提供的地址/掩码无效"
+	}
+	"Check Address"
+	{
+		"en"		"Please check the IP and range you provided"
+		"fr"		"Veuillez vérifier l'IP et la plage indiquées"
+		"ru"		"Проверьте указанные IP и диапазон"
+		"es"		"Verifica la IP y el rango que indicaste"
+		"de"		"Bitte überprüfe die angegebene IP und den Bereich"
+		"pt"		"Verifique o IP e a faixa informados"
+		"chi"		"请检查你提供的 IP 和范围"
+	}
+	"Ban Added"
+	{
+		"#format"	"{1:s},{2:s},{3:s},{4:s},{5:s},{6:s}"
+		"en"		"{red}Banned by: {1} {2} \nPlayer name: {3} \nBanned IP range: {4} \nExpiration: {5} \nReason: {6}"
+		"fr"		"{red}Banni par : {1} {2} \nJoueur : {3} \nPlage d'IP bannie : {4} \nExpiration : {5} \nRaison : {6}"
+		"ru"		"{red}Забанил: {1} {2} \nИгрок: {3} \nДиапазон IP: {4} \nИстекает: {5} \nПричина: {6}"
+		"es"		"{red}Baneado por: {1} {2} \nJugador: {3} \nRango de IP baneado: {4} \nExpira: {5} \nRazón: {6}"
+		"de"		"{red}Gebannt von: {1} {2} \nSpieler: {3} \nGebannter IP-Bereich: {4} \nLäuft ab: {5} \nGrund: {6}"
+		"pt"		"{red}Banido por: {1} {2} \nJogador: {3} \nFaixa de IP banida: {4} \nExpira: {5} \nMotivo: {6}"
+		"chi"		"{red}封禁者：{1} {2} \n玩家名：{3} \n封禁 IP 段：{4} \n到期时间：{5} \n原因：{6}"
+	}
+	"Ban Added Permanent"
+	{
+		"#format"	"{1:s},{2:s},{3:s},{4:s},{5:s}"
+		"en"		"{red}Banned by: {1} {2} \nPlayer name: {3} \nBanned IP range: {4} \nExpiration: Never \nReason: {5}"
+		"fr"		"{red}Banni par : {1} {2} \nJoueur : {3} \nPlage d'IP bannie : {4} \nExpiration : jamais \nRaison : {5}"
+		"ru"		"{red}Забанил: {1} {2} \nИгрок: {3} \nДиапазон IP: {4} \nИстекает: никогда \nПричина: {5}"
+		"es"		"{red}Baneado por: {1} {2} \nJugador: {3} \nRango de IP baneado: {4} \nExpira: nunca \nRazón: {5}"
+		"de"		"{red}Gebannt von: {1} {2} \nSpieler: {3} \nGebannter IP-Bereich: {4} \nLäuft ab: nie \nGrund: {5}"
+		"pt"		"{red}Banido por: {1} {2} \nJogador: {3} \nFaixa de IP banida: {4} \nExpira: nunca \nMotivo: {5}"
+		"chi"		"{red}封禁者：{1} {2} \n玩家名：{3} \n封禁 IP 段：{4} \n到期时间：永不 \n原因：{5}"
+	}
+}
