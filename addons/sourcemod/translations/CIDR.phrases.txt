@@ -34,13 +34,13 @@
 	}
 	"Range Helper 30"
 	{
-		"en"		"{cyan}1.2.3.4/30 {white}(blocks 1.2.3.4 - 1.2.3.4) (PC)"
-		"fr"		"{cyan}1.2.3.4/30 {white}(bloque 1.2.3.4 - 1.2.3.4) (PC)"
-		"ru"		"{cyan}1.2.3.4/30 {white}(блокирует 1.2.3.4 - 1.2.3.4) (ПК)"
-		"es"		"{cyan}1.2.3.4/30 {white}(bloquea 1.2.3.4 - 1.2.3.4) (PC)"
-		"de"		"{cyan}1.2.3.4/30 {white}(sperrt 1.2.3.4 - 1.2.3.4) (PC)"
-		"pt"		"{cyan}1.2.3.4/30 {white}(bloqueia 1.2.3.4 - 1.2.3.4) (PC)"
-		"chi"		"{cyan}1.2.3.4/30 {white}（封禁 1.2.3.4 - 1.2.3.4）（电脑）"
+		"en"		"{cyan}1.2.3.4/30 {white}(blocks 1.2.3.4 - 1.2.3.7) (PC)"
+		"fr"		"{cyan}1.2.3.4/30 {white}(bloque 1.2.3.4 - 1.2.3.7) (PC)"
+		"ru"		"{cyan}1.2.3.4/30 {white}(блокирует 1.2.3.4 - 1.2.3.7) (ПК)"
+		"es"		"{cyan}1.2.3.4/30 {white}(bloquea 1.2.3.4 - 1.2.3.7) (PC)"
+		"de"		"{cyan}1.2.3.4/30 {white}(sperrt 1.2.3.4 - 1.2.3.7) (PC)"
+		"pt"		"{cyan}1.2.3.4/30 {white}(bloqueia 1.2.3.4 - 1.2.3.7) (PC)"
+		"chi"		"{cyan}1.2.3.4/30 {white}（封禁 1.2.3.4 - 1.2.3.7）（电脑）"
 	}
 	"Range Helper 24"
 	{
