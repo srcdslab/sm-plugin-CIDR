@@ -10,7 +10,7 @@ public Plugin myinfo =
     name        = "CIDR Block",
     author      = "Bottiger, maxime1907, .Rushaway",
     description = "Block IPS with CIDR notation",
-    version     = "2.4.6",
+    version     = "2.4.7",
     url         = "http://skial.com"
 };
 
@@ -108,7 +108,7 @@ public Action Command_Add(int client, int args)
             GetCmdArg(0, cmd, sizeof(cmd));
             PrintToConsole(client, "[CIDR] Usage: %s 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\"", cmd);
             PrintToConsole(client, "[CIDR] IP Range helper");
-            PrintToConsole(client, "1.2.3.4/30 (blocks 1.2.3.4 - 1.2.3.4) (PC)");
+            PrintToConsole(client, "1.2.3.4/30 (blocks 1.2.3.4 - 1.2.3.7) (PC)");
             PrintToConsole(client, "1.2.3.4/24 (blocks 1.2.3.0 - 1.2.3.255) (Router/House)");
             PrintToConsole(client, "1.2.3.4/16 (blocks 1.2.0.0 - 1.2.255.255) (City)");
             PrintToConsole(client, "1.2.3.4/8 (blocks 1.0.0.0 - 1.255.255.255) (State)");
