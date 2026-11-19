@@ -10,6 +10,12 @@
 		"de"		"Banlisten-Cache geleert und {1} neu geladen."
 		"pt"		"Cache da lista de banimentos limpo e {1} recarregado."
 		"chi"		"已清除封禁列表缓存并重新加载 {1}。"
+		"pl"		"Wyczyszczono pamięć podręczną banlisty i ponownie wczytano {1}."
+		"tr"		"Önbelleğe alınan ban listesi temizlendi ve {1} yeniden yüklendi."
+		"it"		"Cache della banlist svuotata e {1} ricaricato."
+		"ua"		"Кеш банлисту очищено, {1} перезавантажено."
+		"zho"		"已清除封鎖清單快取並重新載入 {1}。"
+		"cze"		"Vyrovnávací paměť banlistu byla vymazána a {1} znovu načten."
 	}
 	"Add Usage"
 	{
@@ -21,6 +27,12 @@
 		"de"		"Verwendung: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
 		"pt"		"Uso: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
 		"chi"		"用法：{cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"pl"		"Użycie: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"tr"		"Kullanım: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"it"		"Uso: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"ua"		"Використання: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"zho"		"用法：{cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
+		"cze"		"Použití: {cyan}{1} 1.2.3.4/30 10800 \"Boss\" \"Using AimBot + SpinHack\""
 	}
 	"Range Helper"
 	{
@@ -31,6 +43,12 @@
 		"de"		"Hilfe zu IP-Bereichen"
 		"pt"		"Ajuda sobre faixas de IP"
 		"chi"		"IP 段说明"
+		"pl"		"Pomoc dot. zakresów IP"
+		"tr"		"IP aralığı yardımcısı"
+		"it"		"Guida agli intervalli IP"
+		"ua"		"Довідка щодо діапазонів IP"
+		"zho"		"IP 段說明"
+		"cze"		"Nápověda k rozsahům IP"
 	}
 	"Range Helper 30"
 	{
@@ -41,6 +59,12 @@
 		"de"		"{cyan}1.2.3.4/30 {white}(sperrt 1.2.3.4 - 1.2.3.7) (PC)"
 		"pt"		"{cyan}1.2.3.4/30 {white}(bloqueia 1.2.3.4 - 1.2.3.7) (PC)"
 		"chi"		"{cyan}1.2.3.4/30 {white}（封禁 1.2.3.4 - 1.2.3.7）（电脑）"
+		"pl"		"{cyan}1.2.3.4/30 {white}(blokuje 1.2.3.4 - 1.2.3.7) (PC)"
+		"tr"		"{cyan}1.2.3.4/30 {white}(1.2.3.4 - 1.2.3.7 engellenir) (PC)"
+		"it"		"{cyan}1.2.3.4/30 {white}(blocca 1.2.3.4 - 1.2.3.7) (PC)"
+		"ua"		"{cyan}1.2.3.4/30 {white}(блокує 1.2.3.4 - 1.2.3.7) (ПК)"
+		"zho"		"{cyan}1.2.3.4/30 {white}（封鎖 1.2.3.4 - 1.2.3.7）（電腦）"
+		"cze"		"{cyan}1.2.3.4/30 {white}(blokuje 1.2.3.4 - 1.2.3.7) (PC)"
 	}
 	"Range Helper 24"
 	{
@@ -51,6 +75,12 @@
 		"de"		"{cyan}1.2.3.4/24 {white}(sperrt 1.2.3.0 - 1.2.3.255) (Router/Haushalt)"
 		"pt"		"{cyan}1.2.3.4/24 {white}(bloqueia 1.2.3.0 - 1.2.3.255) (Roteador/Casa)"
 		"chi"		"{cyan}1.2.3.4/24 {white}（封禁 1.2.3.0 - 1.2.3.255）（路由器/家庭）"
+		"pl"		"{cyan}1.2.3.4/24 {white}(blokuje 1.2.3.0 - 1.2.3.255) (Router/Dom)"
+		"tr"		"{cyan}1.2.3.4/24 {white}(1.2.3.0 - 1.2.3.255 engellenir) (Modem/Ev)"
+		"it"		"{cyan}1.2.3.4/24 {white}(blocca 1.2.3.0 - 1.2.3.255) (Router/Casa)"
+		"ua"		"{cyan}1.2.3.4/24 {white}(блокує 1.2.3.0 - 1.2.3.255) (Роутер/Дім)"
+		"zho"		"{cyan}1.2.3.4/24 {white}（封鎖 1.2.3.0 - 1.2.3.255）（路由器/家庭）"
+		"cze"		"{cyan}1.2.3.4/24 {white}(blokuje 1.2.3.0 - 1.2.3.255) (Router/Domácnost)"
 	}
 	"Range Helper 16"
 	{
@@ -61,6 +91,12 @@
 		"de"		"{cyan}1.2.3.4/16 {white}(sperrt 1.2.0.0 - 1.2.255.255) (Stadt)"
 		"pt"		"{cyan}1.2.3.4/16 {white}(bloqueia 1.2.0.0 - 1.2.255.255) (Cidade)"
 		"chi"		"{cyan}1.2.3.4/16 {white}（封禁 1.2.0.0 - 1.2.255.255）（城市）"
+		"pl"		"{cyan}1.2.3.4/16 {white}(blokuje 1.2.0.0 - 1.2.255.255) (Miasto)"
+		"tr"		"{cyan}1.2.3.4/16 {white}(1.2.0.0 - 1.2.255.255 engellenir) (Şehir)"
+		"it"		"{cyan}1.2.3.4/16 {white}(blocca 1.2.0.0 - 1.2.255.255) (Città)"
+		"ua"		"{cyan}1.2.3.4/16 {white}(блокує 1.2.0.0 - 1.2.255.255) (Місто)"
+		"zho"		"{cyan}1.2.3.4/16 {white}（封鎖 1.2.0.0 - 1.2.255.255）（城市）"
+		"cze"		"{cyan}1.2.3.4/16 {white}(blokuje 1.2.0.0 - 1.2.255.255) (Město)"
 	}
 	"Range Helper 8"
 	{
@@ -71,6 +107,12 @@
 		"de"		"{cyan}1.2.3.4/8 {white}(sperrt 1.0.0.0 - 1.255.255.255) (Region)"
 		"pt"		"{cyan}1.2.3.4/8 {white}(bloqueia 1.0.0.0 - 1.255.255.255) (Estado)"
 		"chi"		"{cyan}1.2.3.4/8 {white}（封禁 1.0.0.0 - 1.255.255.255）（地区）"
+		"pl"		"{cyan}1.2.3.4/8 {white}(blokuje 1.0.0.0 - 1.255.255.255) (Region)"
+		"tr"		"{cyan}1.2.3.4/8 {white}(1.0.0.0 - 1.255.255.255 engellenir) (Bölge)"
+		"it"		"{cyan}1.2.3.4/8 {white}(blocca 1.0.0.0 - 1.255.255.255) (Regione)"
+		"ua"		"{cyan}1.2.3.4/8 {white}(блокує 1.0.0.0 - 1.255.255.255) (Регіон)"
+		"zho"		"{cyan}1.2.3.4/8 {white}（封鎖 1.0.0.0 - 1.255.255.255）（地區）"
+		"cze"		"{cyan}1.2.3.4/8 {white}(blokuje 1.0.0.0 - 1.255.255.255) (Region)"
 	}
 	"IP Range Added"
 	{
@@ -82,6 +124,12 @@
 		"de"		"IP-Bereich erfolgreich hinzugefügt: {cyan}{1}"
 		"pt"		"Faixa de IP adicionada com sucesso: {cyan}{1}"
 		"chi"		"已成功添加 IP 段：{cyan}{1}"
+		"pl"		"Pomyślnie dodano zakres IP {cyan}{1}"
+		"tr"		"IP aralığı başarıyla eklendi: {cyan}{1}"
+		"it"		"Intervallo IP aggiunto con successo: {cyan}{1}"
+		"ua"		"Діапазон IP успішно додано: {cyan}{1}"
+		"zho"		"已成功新增 IP 段：{cyan}{1}"
+		"cze"		"Rozsah IP úspěšně přidán: {cyan}{1}"
 	}
 	"Invalid Timestamp"
 	{
@@ -93,6 +141,12 @@
 		"de"		"Ungültiger Zeitstempel berechnet (Zeit: {cyan}{1}, Zeitstempel: {2})"
 		"pt"		"Timestamp calculado inválido (tempo: {cyan}{1}, timestamp: {2})"
 		"chi"		"计算出的时间戳无效（时间：{cyan}{1}，时间戳：{2}）"
+		"pl"		"Obliczono nieprawidłowy znacznik czasu (Czas:{cyan}{1}, Znacznik:{2})"
+		"tr"		"Geçersiz zaman damgası hesaplandı (Süre:{cyan}{1}, Zaman damgası:{2})"
+		"it"		"Timestamp calcolato non valido (Tempo:{cyan}{1}, Timestamp:{2})"
+		"ua"		"Обчислено недійсну мітку часу (Час:{cyan}{1}, Мітка:{2})"
+		"zho"		"計算出的時間戳無效（時間：{cyan}{1}，時間戳：{2}）"
+		"cze"		"Vypočítané časové razítko je neplatné (Čas:{cyan}{1}, Razítko:{2})"
 	}
 	"Permanent Ban Hint"
 	{
@@ -103,6 +157,12 @@
 		"de"		"Um jemanden permanent zu bannen, verwende eine Zeit von 0"
 		"pt"		"Para banir alguém permanentemente, use o tempo 0"
 		"chi"		"如需永久封禁，请将时间设为 0"
+		"pl"		"Aby zbanować kogoś permanentnie, użyj wartości czasu 0"
+		"tr"		"Birini kalıcı olarak banlamak için süre değerini 0 girin"
+		"it"		"Per bannare qualcuno permanentemente, usa un valore di tempo pari a 0"
+		"ua"		"Щоб заблокувати гравця назавжди, вкажіть час 0"
+		"zho"		"如需永久封鎖，請將時間設為 0"
+		"cze"		"Chcete-li někoho zabanovat navždy, použijte hodnotu času 0"
 	}
 	"Invalid Address"
 	{
@@ -113,6 +173,12 @@
 		"de"		"Ungültige Adresse/Maske angegeben"
 		"pt"		"Endereço/máscara inválido"
 		"chi"		"提供的地址/掩码无效"
+		"pl"		"Podano nieprawidłowy adres/maskę"
+		"tr"		"Geçersiz adres/maske girildi"
+		"it"		"Indirizzo/maschera non valido"
+		"ua"		"Вказано недійсну адресу/маску"
+		"zho"		"提供的位址/遮罩無效"
+		"cze"		"Zadána neplatná adresa/maska"
 	}
 	"Check Address"
 	{
@@ -123,6 +189,12 @@
 		"de"		"Bitte überprüfe die angegebene IP und den Bereich"
 		"pt"		"Verifique o IP e a faixa informados"
 		"chi"		"请检查你提供的 IP 和范围"
+		"pl"		"Sprawdź podany adres IP i zakres"
+		"tr"		"Lütfen girdiğiniz IP ve aralığı kontrol edin"
+		"it"		"Controlla l'IP e l'intervallo che hai inserito"
+		"ua"		"Перевірте вказані IP та діапазон"
+		"zho"		"請檢查你提供的 IP 和範圍"
+		"cze"		"Zkontrolujte zadanou IP adresu a rozsah"
 	}
 	"Ban Added"
 	{
@@ -134,6 +206,12 @@
 		"de"		"{red}Gebannt von: {1} {2} \nSpieler: {3} \nGebannter IP-Bereich: {4} \nLäuft ab: {5} \nGrund: {6}"
 		"pt"		"{red}Banido por: {1} {2} \nJogador: {3} \nFaixa de IP banida: {4} \nExpira: {5} \nMotivo: {6}"
 		"chi"		"{red}封禁者：{1} {2} \n玩家名：{3} \n封禁 IP 段：{4} \n到期时间：{5} \n原因：{6}"
+		"pl"		"{red}Zbanowany przez: {1} {2} \nNick gracza: {3} \nZbanowany zakres IP: {4} \nWygasa: {5} \nPowód: {6}"
+		"tr"		"{red}Banlayan: {1} {2} \nOyuncu adı: {3} \nBanlanan IP aralığı: {4} \nBitiş: {5} \nSebep: {6}"
+		"it"		"{red}Bannato da: {1} {2} \nNome giocatore: {3} \nIntervallo IP bannato: {4} \nScadenza: {5} \nMotivo: {6}"
+		"ua"		"{red}Заблокував: {1} {2} \nНік гравця: {3} \nЗаблокований діапазон IP: {4} \nЗакінчується: {5} \nПричина: {6}"
+		"zho"		"{red}封鎖者：{1} {2} \n玩家名：{3} \n封鎖 IP 段：{4} \n到期時間：{5} \n原因：{6}"
+		"cze"		"{red}Zabanoval: {1} {2} \nJméno hráče: {3} \nZabanovaný rozsah IP: {4} \nVyprší: {5} \nDůvod: {6}"
 	}
 	"Ban Added Permanent"
 	{
@@ -145,5 +223,11 @@
 		"de"		"{red}Gebannt von: {1} {2} \nSpieler: {3} \nGebannter IP-Bereich: {4} \nLäuft ab: nie \nGrund: {5}"
 		"pt"		"{red}Banido por: {1} {2} \nJogador: {3} \nFaixa de IP banida: {4} \nExpira: nunca \nMotivo: {5}"
 		"chi"		"{red}封禁者：{1} {2} \n玩家名：{3} \n封禁 IP 段：{4} \n到期时间：永不 \n原因：{5}"
+		"pl"		"{red}Zbanowany przez: {1} {2} \nNick gracza: {3} \nZbanowany zakres IP: {4} \nWygasa: Nigdy \nPowód: {5}"
+		"tr"		"{red}Banlayan: {1} {2} \nOyuncu adı: {3} \nBanlanan IP aralığı: {4} \nBitiş: Asla \nSebep: {5}"
+		"it"		"{red}Bannato da: {1} {2} \nNome giocatore: {3} \nIntervallo IP bannato: {4} \nScadenza: Mai \nMotivo: {5}"
+		"ua"		"{red}Заблокував: {1} {2} \nНік гравця: {3} \nЗаблокований діапазон IP: {4} \nЗакінчується: Ніколи \nПричина: {5}"
+		"zho"		"{red}封鎖者：{1} {2} \n玩家名：{3} \n封鎖 IP 段：{4} \n到期時間：永不 \n原因：{5}"
+		"cze"		"{red}Zabanoval: {1} {2} \nJméno hráče: {3} \nZabanovaný rozsah IP: {4} \nVyprší: Nikdy \nDůvod: {5}"
 	}
 }
